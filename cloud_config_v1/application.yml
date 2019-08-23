@@ -1,1 +1,13 @@
-info.foo: bar
+server:
+  port: 8761
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    register-with-eureka: false  #表明是服务端，不是客户端
+    fetch-registry: false  #表明不是客户端，不需要提取注册表
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+spring:
+  application:
+    name: eureka-server
