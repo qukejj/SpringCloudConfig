@@ -1,0 +1,16 @@
+server:
+  port: 9100
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+spring:
+  application:
+    name: ribbon-consumer
+hystrix:
+  command:   #执行命令相关
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 2000  #超时设置，超过指定的时间，那么就执行fallback操作

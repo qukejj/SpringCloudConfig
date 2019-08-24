@@ -1,0 +1,22 @@
+server:
+  port: 9101
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+spring:
+  application:
+    name: feign-consumer
+ribbon:
+  ReadTimeout: 6000   #ribbon读取时间超过6s
+  ConnectTimeout: 6000 #ribbon读取时间超过6s,那么不管是hystrix熔断还是出现异常，都直接进入熔断方法
+hystrix:
+  command:   #执行命令相关
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 2000  #超时设置，超过指定的时间，那么就执行fallback操作
+feign:
+  hystrix:
+    enabled: true  #开启feign对hystrix熔断的支持才行
