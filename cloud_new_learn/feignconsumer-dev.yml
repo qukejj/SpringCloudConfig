@@ -7,6 +7,14 @@ eureka:
 spring:
   application:
     name: feign-consumer
+  zipkin:
+    base-url: 9411  #指定zipkin服务器地址
+    sleuth:
+      web:
+        client:
+          enabled: true  #开启sleuth(链路追踪功能)功能
+      sampler:
+        probability: 1.0   #当设置为1.0时就是链路数据100%收集到zipkin-server
 ribbon:
   ReadTimeout: 6000   #ribbon读取时间超过6s
   ConnectTimeout: 6000 #ribbon读取时间超过6s,那么不管是hystrix熔断还是出现异常，都直接进入熔断方法
