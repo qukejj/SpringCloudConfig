@@ -21,4 +21,4 @@ hystrix:
       execution:
         isolation:
           thread:
-            timeoutInMilliseconds: 2000  #超时设置，超过指定的时间，那么就执行fallback操作
+            timeoutInMilliseconds: 5000  #超时设置，超过指定的时间，那么就执行fallback操作

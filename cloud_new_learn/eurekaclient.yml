@@ -7,6 +7,14 @@ eureka:
 spring:
   application:
     name: eureka-client
+  zipkin:
+    base-url: 9411  #指定zipkin服务器地址
+    sleuth:
+      web:
+        client:
+          enabled: true  #开启sleuth(链路追踪功能)功能
+      sampler:
+        probability: 1.0   #当设置为1.0时就是链路数据100%收集到zipkin-server
   rabbitmq:
     host: localhost
     port: 5672
