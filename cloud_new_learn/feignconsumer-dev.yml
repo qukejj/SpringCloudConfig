@@ -17,14 +17,19 @@ spring:
         probability: 1.0   #当设置为1.0时就是链路数据100%收集到zipkin-server
 ribbon:
   ReadTimeout: 6000   #ribbon读取时间超过6s
-  ConnectTimeout: 6000 #ribbon读取时间超过6s,那么不管是hystrix熔断还是出现异常，都直接进入熔断方法
+  ConnectTimeout: 6000 #ribbon读取时间超过6s
+  MaxAutoRetries: 1     #当ribbon第一此尝试连接6s失败了之后，会再尝试连接一次该服务器6s失败就进行下一次
+  MaxAutoRetriesNextServer: 1
+  OkToRetryOnAllOperations: false # 对所有的操作请求都进行重试，如果是get则可以，如果是post,put等操作没有实现幂等的情况下是很危险的，所以设置为false
 hystrix:
   command:   #执行命令相关
     default:
       execution:
         isolation:
           thread:
-            timeoutInMilliseconds: 5000  #超时设置，超过指定的时间，那么就执行fallback操作
+            timeoutInMilliseconds: 18000   #这里是要>=(1+1+1)*6
+              #如果配置ribbon的重试，hystrix的超时时间要大于ribbon的超时时间，ribbon才会重试
+              #hystrix的超时时间=(1 + MaxAutoRetries + MaxAutoRetriesNextServer) * ReadTimeout 比较好，具体看需求
 feign:
   hystrix:
     enabled: true  #开启feign对hystrix熔断的支持才行
