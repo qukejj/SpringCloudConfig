@@ -1,5 +1,5 @@
 server:
-  port: 9001
+  port: 9000
 eureka:
   client:
     service-url:
@@ -23,3 +23,5 @@ management:   #暴露bus refresh
     web:
       exposure:
         include: bus-refresh
+my:
+  name: lisi
