@@ -24,4 +24,4 @@ management:   #暴露bus refresh
       exposure:
         include: bus-refresh
 my:
-  name: lisi
+  name: wangwu
